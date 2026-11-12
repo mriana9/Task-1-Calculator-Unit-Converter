@@ -1,0 +1,12 @@
+D:\2027intern\MSC\Calculator.Core\bin\Debug\net10.0\Calculator.Core.deps.json
+D:\2027intern\MSC\Calculator.Core\bin\Debug\net10.0\Calculator.Core.dll
+D:\2027intern\MSC\Calculator.Core\bin\Debug\net10.0\Calculator.Core.pdb
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.AssemblyInfoInputs.cache
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.AssemblyInfo.cs
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.csproj.CoreCompileInputs.cache
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.sourcelink.json
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.dll
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\refint\Calculator.Core.dll
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\Calculator.Core.pdb
+D:\2027intern\MSC\Calculator.Core\obj\Debug\net10.0\ref\Calculator.Core.dll
