@@ -100,15 +100,4 @@ public class Calculator
         "^" => Power(a, b),
         _ => throw new InvalidOperationException("Invalid operation")
     };
-
-    // Method to calculate the sum of an array of decimal numbers
-    public decimal Sum(params decimal[] numbers)
-    {
-        decimal total = 0;
-        foreach (var num in numbers)
-        {
-            total += num;
-        }
-        return total;
-    }
 }
