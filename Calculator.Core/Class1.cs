@@ -82,14 +82,14 @@ public class Calculator
     {
         return (decimal)Math.Pow((double)baseNum, (double)exponent);
     }
- 
+
     // Method to calculate the power of an integer number
     public int Power(int baseNum, int exponent)
     {
         return (int)Math.Pow(baseNum, exponent);
     }
 
-   // Method to a calculation based on the operation provided
+    // Method to a calculation based on the operation provided
     public decimal Calculate(string op, decimal a, decimal b) => op switch
     {
         "+" => Add(a, b),
@@ -100,4 +100,42 @@ public class Calculator
         "^" => Power(a, b),
         _ => throw new InvalidOperationException("Invalid operation")
     };
+
+    // Method to round a decimal number
+    public decimal Round(decimal value, int decimals = 2)
+    {
+        return Math.Round(value, decimals);
+    }
+}
+
+public class UnitConverter
+{
+    // Kilometers <-> Miles
+    public decimal KmToMiles(decimal km) => km * 0.621371m;
+    public decimal MilesToKm(decimal miles) => miles / 0.621371m;
+
+    // Celsius <-> Fahrenheit
+    public decimal CelsiusToFahrenheit(decimal c) => (c * 9m / 5m) + 32m;
+    public decimal FahrenheitToCelsius(decimal f) => (f - 32m) * 5m / 9m;
+
+    // Kilograms <-> Pounds (KG <-> LB)
+    public decimal KgToLb(decimal kg) => kg * 2.20462m;
+    public decimal LbToKg(decimal lb) => lb / 2.20462m;
+
+    public decimal Convert(string conversionType, decimal value) => conversionType switch
+    {
+        "KMToMiles" => KmToMiles(value),
+        "MilesToKM" => MilesToKm(value),
+        "CelsiusToFahrenheit" => CelsiusToFahrenheit(value),
+        "FahrenheitToCelsius" => FahrenheitToCelsius(value),
+        "KGToLB" => KgToLb(value),
+        "LBToKG" => LbToKg(value),
+        _ => throw new InvalidOperationException("Invalid conversion type")
+    };
+}
+
+public class CurrencyConverter
+{
+    private const decimal USD_TO_ILS = 3.70m;
+    private const decimal USD_TO_EUR = 0.92m;
 }
