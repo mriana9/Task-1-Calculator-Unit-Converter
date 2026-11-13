@@ -106,6 +106,19 @@ public class Calculator
     {
         return Math.Round(value, decimals);
     }
+
+    // Method to sum an array of decimal numbers
+    public decimal Sum(params decimal[] numbers)
+    {
+        decimal total = 0;
+
+        foreach (decimal number in numbers)
+        {
+            total += number;
+        }
+
+        return total;
+    }
 }
 
 public class UnitConverter
@@ -138,4 +151,55 @@ public class CurrencyConverter
 {
     private const decimal USD_TO_ILS = 3.70m;
     private const decimal USD_TO_EUR = 0.92m;
+
+    public decimal UsdToIls(decimal usd)
+    {
+        return usd * USD_TO_ILS;
+    }
+
+    public decimal IlsToUsd(decimal ils)
+    {
+        return ils / USD_TO_ILS;
+    }
+
+    public decimal UsdToEur(decimal usd)
+    {
+        return usd * USD_TO_EUR;
+    }
+
+    public decimal EurToUsd(decimal eur)
+    {
+        return eur / USD_TO_EUR;
+    }
+
+    public decimal IlsToEur(decimal ils)
+    {
+        return UsdToEur(IlsToUsd(ils));
+    }
+
+    public decimal EurToIls(decimal eur)
+    {
+        return UsdToIls(EurToUsd(eur));
+    }
+
+    public decimal Convert(string fromCurrency, string toCurrency, decimal amount)
+    {
+        return (fromCurrency, toCurrency) switch
+        {
+            ("USD", "ILS") => UsdToIls(amount),
+            ("ILS", "USD") => IlsToUsd(amount),
+
+            ("USD", "EUR") => UsdToEur(amount),
+            ("EUR", "USD") => EurToUsd(amount),
+
+            ("ILS", "EUR") => IlsToEur(amount),
+            ("EUR", "ILS") => EurToIls(amount),
+
+            ("USD", "USD") => amount,
+            ("ILS", "ILS") => amount,
+            ("EUR", "EUR") => amount,
+
+            _ => throw new InvalidOperationException("Invalid currency conversion.")
+        };
+    }
 }
