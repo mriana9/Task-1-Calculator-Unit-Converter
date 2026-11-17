@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using Calculator.Core.Constants;
 using CalculatorService = Calculator.Core.Services.Calculator;
 using UnitConverterService = Calculator.Core.Services.UnitConverter;
@@ -14,7 +13,7 @@ class Program
 
         while (!decimal.TryParse(Console.ReadLine(), out value))
         {
-            Console.WriteLine("Invalid input. Please enter a valid number.");
+            Console.WriteLine(AppMessagesConstants.InvalidNumber);
             Console.Write(prompt);
         }
 
@@ -31,8 +30,8 @@ class Program
         while (!int.TryParse(Console.ReadLine(), out choice)
                || choice < min || choice > max)
         {
-            Console.WriteLine(
-                $"Invalid input. Please enter a number between {min} and {max}.");
+            Console.WriteLine(string.Format(
+                AppMessagesConstants.InvalidChoice, min, max));
 
             Console.Write(prompt);
         }
@@ -46,21 +45,16 @@ class Program
 
         do
         {
-            Console.WriteLine("Welcome to the Calculator App!");
-            Console.WriteLine("--------------------------------");
-            Console.WriteLine("1 - Calculator");
-            Console.WriteLine("2 - Unit Converter");
-            Console.WriteLine("3 - Currency Converter");
-            Console.WriteLine("0 - Exit");
-            Console.WriteLine("--------------------------------");
+            Console.WriteLine(AppMessagesConstants.MainMenu);
 
             number = TryReadChoice(
-                "Enter a number to choose option: ", 0, 3);
+                AppMessagesConstants.MainMenuPrompt, 0, 3);
 
             switch (number)
             {
                 case 1:
-                    Console.WriteLine("Calculator selected.");
+                    Console.WriteLine(
+                        AppMessagesConstants.CalculatorSelected);
 
                     CalculatorService calculator = new CalculatorService();
 
@@ -75,18 +69,18 @@ class Program
                         CalculatorConstants.Sum
                     };
 
-                    Console.Write(
-                        "Enter operation (+, -, *, /, %, ^, sum): ");
+                    Console.Write(AppMessagesConstants.OperationPrompt);
 
                     string? op = Console.ReadLine();
 
                     while (string.IsNullOrWhiteSpace(op) ||
                            !Array.Exists(operations, x => x == op))
                     {
-                        Console.WriteLine("Invalid operation.");
+                        Console.WriteLine(
+                            AppMessagesConstants.InvalidOperation);
 
                         Console.Write(
-                            "Enter operation (+, -, *, /, %, ^, sum): ");
+                            AppMessagesConstants.OperationPrompt);
 
                         op = Console.ReadLine();
                     }
@@ -96,7 +90,7 @@ class Program
                         if (op == CalculatorConstants.Sum)
                         {
                             int count = TryReadChoice(
-                                "How many numbers do you want to sum? ",
+                                AppMessagesConstants.SumCountPrompt,
                                 1,
                                 100);
 
@@ -105,22 +99,26 @@ class Program
                             for (int i = 0; i < count; i++)
                             {
                                 TryReadNumber(
-                                    $"Enter number {i + 1}: ",
+                                    string.Format(
+                                        AppMessagesConstants.NumberPrompt,
+                                        i + 1),
                                     out numbers[i]);
                             }
 
                             decimal result = calculator.Sum(numbers);
 
-                            Console.WriteLine(
-                                $"Sum Result: {result:F2}");
+                            Console.WriteLine(string.Format(
+                                AppMessagesConstants.SumResult, result));
                         }
                         else
                         {
                             TryReadNumber(
-                                "Enter First Number: ", out decimal num1);
+                                AppMessagesConstants.FirstNumberPrompt,
+                                out decimal num1);
 
                             TryReadNumber(
-                                "Enter Second Number: ", out decimal num2);
+                                AppMessagesConstants.SecondNumberPrompt,
+                                out decimal num2);
 
                             decimal result = calculator.Calculate(
                                 op, num1, num2);
@@ -128,38 +126,38 @@ class Program
                             decimal roundedResult = calculator.Round(
                                 value: result);
 
-                            Console.WriteLine(
-                                $"Result: {num1} {op} {num2} = {roundedResult:F2}");
+                            Console.WriteLine(string.Format(
+                                AppMessagesConstants.CalculationResult,
+                                num1, op, num2, roundedResult));
                         }
                     }
                     catch (DivideByZeroException ex)
                     {
-                        Console.WriteLine("Error: " + ex.Message);
+                        Console.WriteLine(
+                            AppMessagesConstants.Error + ex.Message);
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error: " + ex.Message);
+                        Console.WriteLine(
+                            AppMessagesConstants.Error + ex.Message);
                     }
 
                     break;
 
                 case 2:
-                    Console.WriteLine("Unit Converter selected.");
+                    Console.WriteLine(
+                        AppMessagesConstants.UnitConverterSelected);
 
                     UnitConverterService unitConverter =
                         new UnitConverterService();
 
-                    Console.WriteLine("Choose a conversion:");
-                    Console.WriteLine("1 - Kilometers to Miles");
-                    Console.WriteLine("2 - Miles to Kilometers");
-                    Console.WriteLine("3 - Celsius to Fahrenheit");
-                    Console.WriteLine("4 - Fahrenheit to Celsius");
-                    Console.WriteLine("5 - Kilograms to Pounds");
-                    Console.WriteLine("6 - Pounds to Kilograms");
-                    Console.WriteLine("0 - Back to Main Menu");
+                    Console.WriteLine(
+                        AppMessagesConstants.UnitConversionMenu);
 
                     int conversionChoice = TryReadChoice(
-                        "Enter your choice: ", 0, 6);
+                        AppMessagesConstants.ConversionChoicePrompt,
+                        0,
+                        6);
 
                     if (conversionChoice == 0)
                     {
@@ -178,32 +176,32 @@ class Program
                     };
 
                     TryReadNumber(
-                        "Enter the value to convert: ", out decimal value);
+                        AppMessagesConstants.ConversionValuePrompt,
+                        out decimal value);
 
                     decimal convertedValue = unitConverter.Convert(
                         conversionType, value);
 
-                    Console.WriteLine($"Result: {convertedValue:F2}");
+                    Console.WriteLine(string.Format(
+                        AppMessagesConstants.ConversionResult,
+                        convertedValue));
 
                     break;
 
                 case 3:
-                    Console.WriteLine("Currency Converter selected.");
+                    Console.WriteLine(
+                        AppMessagesConstants.CurrencyConverterSelected);
 
                     CurrencyConverterService currencyConverter =
                         new CurrencyConverterService();
 
-                    Console.WriteLine("Choose a conversion:");
-                    Console.WriteLine("1 - USD to ILS");
-                    Console.WriteLine("2 - ILS to USD");
-                    Console.WriteLine("3 - USD to EUR");
-                    Console.WriteLine("4 - EUR to USD");
-                    Console.WriteLine("5 - ILS to EUR");
-                    Console.WriteLine("6 - EUR to ILS");
-                    Console.WriteLine("0 - Back to Main Menu");
+                    Console.WriteLine(
+                        AppMessagesConstants.CurrencyConversionMenu);
 
                     int currencyChoice = TryReadChoice(
-                        "Enter your choice: ", 0, 6);
+                        AppMessagesConstants.ConversionChoicePrompt,
+                        0,
+                        6);
 
                     if (currencyChoice == 0)
                     {
@@ -233,24 +231,31 @@ class Program
                     };
 
                     TryReadNumber(
-                        "Enter the amount to convert: ", out decimal amount);
+                        AppMessagesConstants.AmountPrompt,
+                        out decimal amount);
 
                     decimal convertedAmount = currencyConverter.Convert(
                         fromCurrency,
                         toCurrency,
                         amount);
 
-                    Console.WriteLine(
-                        $"Result: {amount:F2} {fromCurrency} = {convertedAmount:F2} {toCurrency}");
+                    Console.WriteLine(string.Format(
+                        AppMessagesConstants.CurrencyResult,
+                        amount,
+                        fromCurrency,
+                        convertedAmount,
+                        toCurrency));
 
                     break;
 
                 case 0:
-                    Console.WriteLine("Exiting the application.");
+                    Console.WriteLine(
+                        AppMessagesConstants.ExitMessage);
+
                     break;
             }
 
-            Console.WriteLine("\n--------------------------------\n");
+            Console.WriteLine(AppMessagesConstants.EndSeparator);
 
         } while (number != 0);
     }
