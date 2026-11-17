@@ -3,6 +3,8 @@ namespace Calculator.Core.Constants;
 
 public static class CurrencyConstants
 {
+
+    
     // Currency codes
     public const string USD = "USD";
     public const string ILS = "ILS";

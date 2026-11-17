@@ -13,7 +13,7 @@ class Program
     {
         Console.WriteLine(AppMessagesConstants.CalculatorSelected);
 
-        CalculatorService calculator = new CalculatorService();
+        CalculatorService calculator = CalculatorService.Instance;
 
         string[] operations =
         {
@@ -87,7 +87,7 @@ class Program
     {
         Console.WriteLine(AppMessagesConstants.UnitConverterSelected);
 
-        UnitConverterService unitConverter = new UnitConverterService();
+        UnitConverterService unitConverter = UnitConverterService.Instance;
 
         Console.WriteLine(AppMessagesConstants.UnitConversionMenu);
 
@@ -122,7 +122,7 @@ class Program
         Console.WriteLine(AppMessagesConstants.CurrencyConverterSelected);
 
         CurrencyConverterService currencyConverter =
-            new CurrencyConverterService();
+            CurrencyConverterService.Instance;
 
         Console.WriteLine(AppMessagesConstants.CurrencyConversionMenu);
 

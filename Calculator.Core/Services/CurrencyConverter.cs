@@ -5,6 +5,15 @@ namespace Calculator.Core.Services;
 
 public class CurrencyConverter
 {
+
+    // Creates a single shared instance
+    public static CurrencyConverter Instance { get; } = new CurrencyConverter();
+
+    // Prevents creating objects from outside
+    private CurrencyConverter()
+    {
+    }
+
     // Converts USD to ILS
     public decimal UsdToIls(decimal usd)
     {

@@ -5,6 +5,14 @@ namespace Calculator.Core.Services;
 
 public class Calculator
 {
+
+    // Creates a single shared instance
+    public static Calculator Instance { get; } = new Calculator();
+
+    // Prevents creating objects from outside
+    private Calculator()
+    {
+    }
     // Adds two decimal numbers
     public decimal Add(decimal num1, decimal num2)
     {

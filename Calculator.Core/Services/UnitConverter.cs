@@ -5,6 +5,15 @@ namespace Calculator.Core.Services;
 
 public class UnitConverter
 {
+
+    // Creates a single shared instance
+    public static UnitConverter Instance { get; } = new UnitConverter();
+
+    // Prevents creating objects from outside
+    private UnitConverter()
+    {
+    }
+    
     // Converts kilometers to miles
     public decimal KmToMiles(decimal km)
     {
