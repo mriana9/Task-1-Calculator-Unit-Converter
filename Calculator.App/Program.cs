@@ -1,9 +1,13 @@
 ﻿
 using System;
-using Calculator.Core;
+using Calculator.Core.Constants;
+using CalculatorService = Calculator.Core.Services.Calculator;
+using UnitConverterService = Calculator.Core.Services.UnitConverter;
+using CurrencyConverterService = Calculator.Core.Services.CurrencyConverter;
 
 class Program
 {
+    // Reads a valid decimal number
     static bool TryReadNumber(string prompt, out decimal value)
     {
         Console.Write(prompt);
@@ -17,6 +21,7 @@ class Program
         return true;
     }
 
+    // Reads a valid menu choice within a range
     static int TryReadChoice(string prompt, int min, int max)
     {
         Console.Write(prompt);
@@ -57,12 +62,17 @@ class Program
                 case 1:
                     Console.WriteLine("Calculator selected.");
 
-                    Calculator.Core.Calculator calculator =
-                        new Calculator.Core.Calculator();
+                    CalculatorService calculator = new CalculatorService();
 
                     string[] operations =
                     {
-                        "+", "-", "*", "/", "%", "^", "sum"
+                        CalculatorConstants.Add,
+                        CalculatorConstants.Subtract,
+                        CalculatorConstants.Multiply,
+                        CalculatorConstants.Divide,
+                        CalculatorConstants.Modulus,
+                        CalculatorConstants.Power,
+                        CalculatorConstants.Sum
                     };
 
                     Console.Write(
@@ -83,7 +93,7 @@ class Program
 
                     try
                     {
-                        if (op == "sum")
+                        if (op == CalculatorConstants.Sum)
                         {
                             int count = TryReadChoice(
                                 "How many numbers do you want to sum? ",
@@ -136,7 +146,8 @@ class Program
                 case 2:
                     Console.WriteLine("Unit Converter selected.");
 
-                    UnitConverter unitConverter = new UnitConverter();
+                    UnitConverterService unitConverter =
+                        new UnitConverterService();
 
                     Console.WriteLine("Choose a conversion:");
                     Console.WriteLine("1 - Kilometers to Miles");
@@ -157,12 +168,12 @@ class Program
 
                     string conversionType = conversionChoice switch
                     {
-                        1 => "KMToMiles",
-                        2 => "MilesToKM",
-                        3 => "CelsiusToFahrenheit",
-                        4 => "FahrenheitToCelsius",
-                        5 => "KGToLB",
-                        6 => "LBToKG",
+                        1 => UnitConversionConstants.KmToMiles,
+                        2 => UnitConversionConstants.MilesToKm,
+                        3 => UnitConversionConstants.CelsiusToFahrenheit,
+                        4 => UnitConversionConstants.FahrenheitToCelsius,
+                        5 => UnitConversionConstants.KgToLb,
+                        6 => UnitConversionConstants.LbToKg,
                         _ => ""
                     };
 
@@ -179,8 +190,8 @@ class Program
                 case 3:
                     Console.WriteLine("Currency Converter selected.");
 
-                    CurrencyConverter currencyConverter =
-                        new CurrencyConverter();
+                    CurrencyConverterService currencyConverter =
+                        new CurrencyConverterService();
 
                     Console.WriteLine("Choose a conversion:");
                     Console.WriteLine("1 - USD to ILS");
@@ -201,23 +212,23 @@ class Program
 
                     string fromCurrency = currencyChoice switch
                     {
-                        1 => "USD",
-                        2 => "ILS",
-                        3 => "USD",
-                        4 => "EUR",
-                        5 => "ILS",
-                        6 => "EUR",
+                        1 => CurrencyConstants.USD,
+                        2 => CurrencyConstants.ILS,
+                        3 => CurrencyConstants.USD,
+                        4 => CurrencyConstants.EUR,
+                        5 => CurrencyConstants.ILS,
+                        6 => CurrencyConstants.EUR,
                         _ => ""
                     };
 
                     string toCurrency = currencyChoice switch
                     {
-                        1 => "ILS",
-                        2 => "USD",
-                        3 => "EUR",
-                        4 => "USD",
-                        5 => "EUR",
-                        6 => "ILS",
+                        1 => CurrencyConstants.ILS,
+                        2 => CurrencyConstants.USD,
+                        3 => CurrencyConstants.EUR,
+                        4 => CurrencyConstants.USD,
+                        5 => CurrencyConstants.EUR,
+                        6 => CurrencyConstants.ILS,
                         _ => ""
                     };
 
