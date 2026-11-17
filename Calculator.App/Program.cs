@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Calculator.Core.Constants;
 using CalculatorService = Calculator.Core.Services.Calculator;
 using UnitConverterService = Calculator.Core.Services.UnitConverter;
@@ -39,6 +40,26 @@ class Program
         return choice;
     }
 
+    // Reads a valid calculator operation
+    static string TryReadOperation(string[] operations)
+    {
+        Console.Write(AppMessagesConstants.OperationPrompt);
+
+        string? operation = Console.ReadLine();
+
+        while (string.IsNullOrWhiteSpace(operation) ||
+               !Array.Exists(operations, x => x == operation))
+        {
+            Console.WriteLine(AppMessagesConstants.InvalidOperation);
+
+            Console.Write(AppMessagesConstants.OperationPrompt);
+
+            operation = Console.ReadLine();
+        }
+
+        return operation;
+    }
+
     static void Main(string[] args)
     {
         int number = 0;
@@ -69,21 +90,7 @@ class Program
                         CalculatorConstants.Sum
                     };
 
-                    Console.Write(AppMessagesConstants.OperationPrompt);
-
-                    string? op = Console.ReadLine();
-
-                    while (string.IsNullOrWhiteSpace(op) ||
-                           !Array.Exists(operations, x => x == op))
-                    {
-                        Console.WriteLine(
-                            AppMessagesConstants.InvalidOperation);
-
-                        Console.Write(
-                            AppMessagesConstants.OperationPrompt);
-
-                        op = Console.ReadLine();
-                    }
+                    string op = TryReadOperation(operations);
 
                     try
                     {
