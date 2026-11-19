@@ -193,42 +193,44 @@ class Program
 
     static void Main(string[] args)
     {
-        int choice;
+        MainMenuOption choice;
 
         do
         {
             Console.WriteLine(
                 AppMessagesConstants.MainMenu);
 
-            choice = InputHelper.TryReadChoice(
-                AppMessagesConstants.MainMenuPrompt, 0, 3);
+            choice = (MainMenuOption)InputHelper.TryReadChoice(
+                AppMessagesConstants.MainMenuPrompt,
+                (int)MainMenuOption.Exit,
+                (int)MainMenuOption.CurrencyConverter);
 
             switch (choice)
             {
-                case 1:
+                case MainMenuOption.Calculator:
                     RunCalculator();
                     break;
 
-                case 2:
+                case MainMenuOption.UnitConverter:
                     RunUnitConverter();
                     break;
 
-                case 3:
+                case MainMenuOption.CurrencyConverter:
                     RunCurrencyConverter();
                     break;
 
-                case 0:
+                case MainMenuOption.Exit:
                     Console.WriteLine(
                         AppMessagesConstants.ExitMessage);
                     break;
             }
 
-            if (choice != 0)
+            if (choice != MainMenuOption.Exit)
             {
                 Console.WriteLine(
                     AppMessagesConstants.EndSeparator);
             }
 
-        } while (choice != 0);
+        } while (choice != MainMenuOption.Exit);
     }
 }
