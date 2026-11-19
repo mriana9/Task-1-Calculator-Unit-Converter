@@ -21,8 +21,10 @@ public static class InputHelper
     }
 
     // Reads an integer within the specified range
-
-    public static int TryReadChoice(string prompt, int min, int max)
+    public static int TryReadChoice(
+        string prompt,
+        int min = int.MinValue,
+        int max = int.MaxValue)
     {
         Console.Write(prompt);
         int choice;

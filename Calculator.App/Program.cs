@@ -30,56 +30,55 @@ class Program
 
         try
         {
-            if (operation.Equals(CalculatorConstants.Sum, StringComparison.OrdinalIgnoreCase))
+            if (operation.Equals(
+                CalculatorConstants.Sum,
+                StringComparison.OrdinalIgnoreCase))
             {
-                InputHelper.TryReadNumber(
-                    AppMessagesConstants.SumCountPrompt, out decimal countValue);
-
-                int count = (int)countValue;
-
-                while (count <= 0)
-                {
-                    Console.WriteLine(AppMessagesConstants.InvalidNumber);
-
-                    InputHelper.TryReadNumber(
-                        AppMessagesConstants.SumCountPrompt, out countValue);
-
-                    count = (int)countValue;
-                }
+                int count = InputHelper.TryReadChoice(
+                    AppMessagesConstants.SumCountPrompt, 1);
 
                 decimal[] numbers = new decimal[count];
 
                 for (int i = 0; i < count; i++)
                 {
                     InputHelper.TryReadNumber(
-                        string.Format(AppMessagesConstants.NumberPrompt, i + 1),
+                        string.Format(
+                            AppMessagesConstants.NumberPrompt, i + 1),
                         out numbers[i]);
                 }
 
                 decimal sumResult = calculator.Sum(numbers);
 
                 Console.WriteLine(
-                    string.Format(AppMessagesConstants.SumResult, sumResult));
+                    string.Format(
+                        AppMessagesConstants.SumResult, sumResult));
             }
             else
             {
                 InputHelper.TryReadNumber(
-                    AppMessagesConstants.FirstNumberPrompt, out decimal num1);
+                    AppMessagesConstants.FirstNumberPrompt,
+                    out decimal num1);
 
                 InputHelper.TryReadNumber(
-                    AppMessagesConstants.SecondNumberPrompt, out decimal num2);
+                    AppMessagesConstants.SecondNumberPrompt,
+                    out decimal num2);
 
-                decimal result = calculator.Calculate(operation, num1, num2);
+                decimal result = calculator.Calculate(
+                    operation, num1, num2);
 
                 Console.WriteLine(
                     string.Format(
                         AppMessagesConstants.CalculationResult,
-                        num1, operation, num2, calculator.Round(result)));
+                        num1,
+                        operation,
+                        num2,
+                        calculator.Round(result)));
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine(AppMessagesConstants.Error + ex.Message);
+            Console.WriteLine(
+                AppMessagesConstants.Error + ex.Message);
         }
     }
 
@@ -87,7 +86,8 @@ class Program
     {
         Console.WriteLine(AppMessagesConstants.UnitConverterSelected);
 
-        UnitConverterService unitConverter = UnitConverterService.Instance;
+        UnitConverterService unitConverter =
+            UnitConverterService.Instance;
 
         Console.WriteLine(AppMessagesConstants.UnitConversionMenu);
 
@@ -109,12 +109,15 @@ class Program
         };
 
         InputHelper.TryReadNumber(
-            AppMessagesConstants.ConversionValuePrompt, out decimal value);
+            AppMessagesConstants.ConversionValuePrompt,
+            out decimal value);
 
-        decimal result = unitConverter.Convert(conversionType, value);
+        decimal result = unitConverter.Convert(
+            conversionType, value);
 
         Console.WriteLine(
-            string.Format(AppMessagesConstants.ConversionResult, result));
+            string.Format(
+                AppMessagesConstants.ConversionResult, result));
     }
 
     static void RunCurrencyConverter()
@@ -144,15 +147,21 @@ class Program
         };
 
         InputHelper.TryReadNumber(
-            AppMessagesConstants.AmountPrompt, out decimal amount);
+            AppMessagesConstants.AmountPrompt,
+            out decimal amount);
 
         decimal result = currencyConverter.Convert(
-            currencies.Item1, currencies.Item2, amount);
+            currencies.Item1,
+            currencies.Item2,
+            amount);
 
         Console.WriteLine(
             string.Format(
                 AppMessagesConstants.CurrencyResult,
-                amount, currencies.Item1, result, currencies.Item2));
+                amount,
+                currencies.Item1,
+                result,
+                currencies.Item2));
     }
 
     static void Main(string[] args)
@@ -181,12 +190,16 @@ class Program
                     break;
 
                 case 0:
-                    Console.WriteLine(AppMessagesConstants.ExitMessage);
+                    Console.WriteLine(
+                        AppMessagesConstants.ExitMessage);
                     break;
             }
 
             if (choice != 0)
-                Console.WriteLine(AppMessagesConstants.EndSeparator);
+            {
+                Console.WriteLine(
+                    AppMessagesConstants.EndSeparator);
+            }
 
         } while (choice != 0);
     }
