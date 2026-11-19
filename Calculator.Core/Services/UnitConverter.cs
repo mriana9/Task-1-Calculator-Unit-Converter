@@ -5,8 +5,14 @@ namespace Calculator.Core.Services;
 
 public class UnitConverter
 {
-    // Creates a single shared instance
-    public static UnitConverter Instance { get; } = new UnitConverter();
+    // Stores a single private shared instance
+    private static readonly UnitConverter _instance = new UnitConverter();
+
+    // Returns the shared instance
+    public static UnitConverter GetInstance()
+    {
+        return _instance;
+    }
 
     // Prevents creating objects from outside
     private UnitConverter()

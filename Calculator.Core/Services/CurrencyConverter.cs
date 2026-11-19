@@ -5,9 +5,15 @@ namespace Calculator.Core.Services;
 
 public class CurrencyConverter
 {
+    // Stores a single private shared instance
+    private static readonly CurrencyConverter _instance =
+        new CurrencyConverter();
 
-    // Creates a single shared instance
-    public static CurrencyConverter Instance { get; } = new CurrencyConverter();
+    // Returns the shared instance
+    public static CurrencyConverter GetInstance()
+    {
+        return _instance;
+    }
 
     // Prevents creating objects from outside
     private CurrencyConverter()

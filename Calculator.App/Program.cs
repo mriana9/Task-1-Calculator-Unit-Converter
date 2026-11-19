@@ -13,7 +13,7 @@ class Program
     {
         Console.WriteLine(AppMessagesConstants.CalculatorSelected);
 
-        CalculatorService calculator = CalculatorService.Instance;
+        CalculatorService calculator = CalculatorService.GetInstance();
 
         string operation = InputHelper.TryReadOperation();
 
@@ -77,7 +77,7 @@ class Program
             AppMessagesConstants.UnitConverterSelected);
 
         UnitConverterService unitConverter =
-            UnitConverterService.Instance;
+            UnitConverterService.GetInstance();
 
         Console.WriteLine(
             AppMessagesConstants.UnitConversionMenu);
@@ -134,7 +134,7 @@ class Program
             AppMessagesConstants.CurrencyConverterSelected);
 
         CurrencyConverterService currencyConverter =
-            CurrencyConverterService.Instance;
+            CurrencyConverterService.GetInstance();
 
         Console.WriteLine(
             AppMessagesConstants.CurrencyConversionMenu);
