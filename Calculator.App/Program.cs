@@ -147,14 +147,29 @@ class Program
         if (choice == AppConstants.BackToMainMenu)
             return;
 
-        var currencies = choice switch
+        CurrencyConversionOption conversionOption =
+            (CurrencyConversionOption)choice;
+
+        var currencies = conversionOption switch
         {
-            1 => (CurrencyConstants.USD, CurrencyConstants.ILS),
-            2 => (CurrencyConstants.ILS, CurrencyConstants.USD),
-            3 => (CurrencyConstants.USD, CurrencyConstants.EUR),
-            4 => (CurrencyConstants.EUR, CurrencyConstants.USD),
-            5 => (CurrencyConstants.ILS, CurrencyConstants.EUR),
-            6 => (CurrencyConstants.EUR, CurrencyConstants.ILS),
+            CurrencyConversionOption.UsdToIls =>
+                (CurrencyConstants.USD, CurrencyConstants.ILS),
+
+            CurrencyConversionOption.IlsToUsd =>
+                (CurrencyConstants.ILS, CurrencyConstants.USD),
+
+            CurrencyConversionOption.UsdToEur =>
+                (CurrencyConstants.USD, CurrencyConstants.EUR),
+
+            CurrencyConversionOption.EurToUsd =>
+                (CurrencyConstants.EUR, CurrencyConstants.USD),
+
+            CurrencyConversionOption.IlsToEur =>
+                (CurrencyConstants.ILS, CurrencyConstants.EUR),
+
+            CurrencyConversionOption.EurToIls =>
+                (CurrencyConstants.EUR, CurrencyConstants.ILS),
+
             _ => ("", "")
         };
 
