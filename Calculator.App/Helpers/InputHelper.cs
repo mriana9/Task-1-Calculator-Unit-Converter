@@ -27,13 +27,15 @@ public static class InputHelper
         int max = int.MaxValue)
     {
         Console.Write(prompt);
+
         int choice;
 
         while (!int.TryParse(Console.ReadLine(), out choice) ||
                choice < min || choice > max)
         {
             Console.WriteLine(
-                string.Format(AppMessagesConstants.InvalidChoice, min, max));
+                string.Format(
+                    AppMessagesConstants.InvalidChoice, min, max));
 
             Console.Write(prompt);
         }
@@ -42,18 +44,34 @@ public static class InputHelper
     }
 
     // Reads an operation and checks whether it is supported
-    public static string TryReadOperation(string[] operations)
+
+    // Reads an operation and checks whether it is supported
+    public static string TryReadOperation(string[]? operations = null)
     {
+        operations ??= new[]
+        {
+            CalculatorConstants.Add,
+            CalculatorConstants.Subtract,
+            CalculatorConstants.Multiply,
+            CalculatorConstants.Divide,
+            CalculatorConstants.Modulus,
+            CalculatorConstants.Power,
+            CalculatorConstants.Sum
+        };
+
         Console.Write(AppMessagesConstants.OperationPrompt);
 
         string operation = Console.ReadLine() ?? "";
 
         while (!Array.Exists(
-                   operations,
-                   item => item.Equals(operation, StringComparison.OrdinalIgnoreCase)))
+            operations,
+            item => item.Equals(
+                operation,
+                StringComparison.OrdinalIgnoreCase)))
         {
             Console.WriteLine(AppMessagesConstants.InvalidOperation);
             Console.Write(AppMessagesConstants.OperationPrompt);
+
             operation = Console.ReadLine() ?? "";
         }
 

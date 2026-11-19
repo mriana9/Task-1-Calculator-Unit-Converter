@@ -15,18 +15,7 @@ class Program
 
         CalculatorService calculator = CalculatorService.Instance;
 
-        string[] operations =
-        {
-            CalculatorConstants.Add,
-            CalculatorConstants.Subtract,
-            CalculatorConstants.Multiply,
-            CalculatorConstants.Divide,
-            CalculatorConstants.Modulus,
-            CalculatorConstants.Power,
-            CalculatorConstants.Sum
-        };
-
-        string operation = InputHelper.TryReadOperation(operations);
+        string operation = InputHelper.TryReadOperation();
 
         try
         {
@@ -84,17 +73,21 @@ class Program
 
     static void RunUnitConverter()
     {
-        Console.WriteLine(AppMessagesConstants.UnitConverterSelected);
+        Console.WriteLine(
+            AppMessagesConstants.UnitConverterSelected);
 
         UnitConverterService unitConverter =
             UnitConverterService.Instance;
 
-        Console.WriteLine(AppMessagesConstants.UnitConversionMenu);
+        Console.WriteLine(
+            AppMessagesConstants.UnitConversionMenu);
 
         int choice = InputHelper.TryReadChoice(
-            AppMessagesConstants.ConversionChoicePrompt, 0, 6);
+            AppMessagesConstants.ConversionChoicePrompt,
+            AppConstants.BackToMainMenu,
+            6);
 
-        if (choice == 0)
+        if (choice == AppConstants.BackToMainMenu)
             return;
 
         string conversionType = choice switch
@@ -122,17 +115,21 @@ class Program
 
     static void RunCurrencyConverter()
     {
-        Console.WriteLine(AppMessagesConstants.CurrencyConverterSelected);
+        Console.WriteLine(
+            AppMessagesConstants.CurrencyConverterSelected);
 
         CurrencyConverterService currencyConverter =
             CurrencyConverterService.Instance;
 
-        Console.WriteLine(AppMessagesConstants.CurrencyConversionMenu);
+        Console.WriteLine(
+            AppMessagesConstants.CurrencyConversionMenu);
 
         int choice = InputHelper.TryReadChoice(
-            AppMessagesConstants.ConversionChoicePrompt, 0, 6);
+            AppMessagesConstants.ConversionChoicePrompt,
+            AppConstants.BackToMainMenu,
+            6);
 
-        if (choice == 0)
+        if (choice == AppConstants.BackToMainMenu)
             return;
 
         var currencies = choice switch
@@ -170,7 +167,8 @@ class Program
 
         do
         {
-            Console.WriteLine(AppMessagesConstants.MainMenu);
+            Console.WriteLine(
+                AppMessagesConstants.MainMenu);
 
             choice = InputHelper.TryReadChoice(
                 AppMessagesConstants.MainMenuPrompt, 0, 3);
