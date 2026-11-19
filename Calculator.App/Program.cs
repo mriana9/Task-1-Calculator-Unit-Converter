@@ -90,14 +90,29 @@ class Program
         if (choice == AppConstants.BackToMainMenu)
             return;
 
-        string conversionType = choice switch
+        UnitConversionOption conversionOption =
+            (UnitConversionOption)choice;
+
+        string conversionType = conversionOption switch
         {
-            1 => UnitConversionConstants.KmToMiles,
-            2 => UnitConversionConstants.MilesToKm,
-            3 => UnitConversionConstants.CelsiusToFahrenheit,
-            4 => UnitConversionConstants.FahrenheitToCelsius,
-            5 => UnitConversionConstants.KgToLb,
-            6 => UnitConversionConstants.LbToKg,
+            UnitConversionOption.KmToMiles =>
+                UnitConversionConstants.KmToMiles,
+
+            UnitConversionOption.MilesToKm =>
+                UnitConversionConstants.MilesToKm,
+
+            UnitConversionOption.CelsiusToFahrenheit =>
+                UnitConversionConstants.CelsiusToFahrenheit,
+
+            UnitConversionOption.FahrenheitToCelsius =>
+                UnitConversionConstants.FahrenheitToCelsius,
+
+            UnitConversionOption.KgToLb =>
+                UnitConversionConstants.KgToLb,
+
+            UnitConversionOption.LbToKg =>
+                UnitConversionConstants.LbToKg,
+
             _ => ""
         };
 
