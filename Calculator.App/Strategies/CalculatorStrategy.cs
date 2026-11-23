@@ -1,17 +1,22 @@
+
 using Calculator.App.Helpers;
 using Calculator.Core.Constants;
-using Calculator.Core.Services;
+using CalculatorService = Calculator.Core.Services.Calculator;
 
 namespace Calculator.App.Strategies;
 
 public class CalculatorStrategy : IMenuStrategy
 {
+    private readonly CalculatorService _calculator;
+
+    public CalculatorStrategy()
+    {
+        _calculator = CalculatorService.GetInstance();
+    }
+
     public void Execute()
     {
         Console.WriteLine(AppMessagesConstants.CalculatorSelected);
-
-        global::Calculator.Core.Services.Calculator calculator =
-            global::Calculator.Core.Services.Calculator.GetInstance();
 
         string operation = InputHelper.TryReadOperation();
 
@@ -34,7 +39,7 @@ public class CalculatorStrategy : IMenuStrategy
                         out numbers[i]);
                 }
 
-                decimal sumResult = calculator.Sum(numbers);
+                decimal sumResult = _calculator.Sum(numbers);
 
                 Console.WriteLine(
                     string.Format(
@@ -50,7 +55,7 @@ public class CalculatorStrategy : IMenuStrategy
                     AppMessagesConstants.SecondNumberPrompt,
                     out decimal num2);
 
-                decimal result = calculator.Calculate(
+                decimal result = _calculator.Calculate(
                     operation, num1, num2);
 
                 Console.WriteLine(
@@ -59,7 +64,7 @@ public class CalculatorStrategy : IMenuStrategy
                         num1,
                         operation,
                         num2,
-                        calculator.Round(result)));
+                        _calculator.Round(result)));
             }
         }
         catch (Exception ex)
